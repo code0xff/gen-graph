@@ -1,0 +1,5 @@
+.Map .Block {
+  border: 1px black solid;
+  border-collapse: collapse;
+  background-size: cover;
+}
