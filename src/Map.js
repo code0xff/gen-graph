@@ -15,11 +15,13 @@ class Map extends Component {
   map=[empty, grass, water, sand, town, tree, mountain, well, drum];
 
   componentDidMount() {
-    let obj;
+    let obj, rowId, colId;
     for (let i = 1; i <= 50; i++) {
+      rowId = i < 10 ? '0' + i : i;
       for (let j = 1; j <= 50; j++) {
+        colId = j < 10 ? '0' + j : j;
         obj = {};
-        obj[i + '' + j] = 0;
+        obj[rowId + '' + colId] = 0;
         this.setState(obj);
       }
     }
@@ -46,7 +48,7 @@ class Map extends Component {
     }
     return rows.map((rowIndex) => {
       let blocks = cols.map((colIndex) => {
-        let id = rowIndex + '' + colIndex;
+        let id = (rowIndex < 10 ? '0' + rowIndex : rowIndex) + '' + (colIndex < 10 ? '0' + colIndex : colIndex);
         return <td className='Block'
         onClick={this._setBlockType}
         key={colIndex} id={id} 
