@@ -5,36 +5,16 @@ import Menu from './Menu';
 class Main extends Component {
   state = { row: 5, col: 5, width: 300, height: 300}
 
-  _setRow = (e) => {
-    let rowSize = e.target.value === '' ? 0 : parseInt(e.target.value);
-    if (rowSize > 50) {
-      alert('row의 최대 사이즈는 50입니다.');
-      rowSize = 50;
-    }
+  _setRow = (rowSize) => {
     this.setState({row: rowSize});
   }
-  _setCol = (e) => {
-    let colSize = e.target.value === '' ? 0 : parseInt(e.target.value);
-    if (colSize > 50) {
-      alert('column의 최대 사이즈는 50입니다.');
-      colSize = 50;
-    }
+  _setCol = (colSize) => {
     this.setState({col: colSize});
   }
-  _setWidth = (e) => {
-    let widthSize = e.target.value === '' ? 0 : parseInt(e.target.value);
-    if (widthSize > 1000) {
-      alert('width의 최대 사이즈는 1000입니다.');
-      widthSize = 1000;
-    }
+  _setWidth = (widthSize) => {
     this.setState({width: widthSize});
   }
-  _setHeight = (e) => {
-    let heightSize = e.target.value === '' ? 0 : parseInt(e.target.value);
-    if (heightSize > 1000) {
-      alert('height의 최대 사이즈는 1000입니다.');
-      heightSize = 1000;
-    }
+  _setHeight = (heightSize) => {
     this.setState({height: heightSize});
   }
    render() {

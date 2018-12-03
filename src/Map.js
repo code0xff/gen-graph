@@ -51,7 +51,7 @@ class Map extends Component {
         let id = (rowIndex < 10 ? '0' + rowIndex : rowIndex) + '' + (colIndex < 10 ? '0' + colIndex : colIndex);
         return <td className='Block'
         onClick={this._setBlockType}
-        key={colIndex} id={id} 
+        key={id} id={id} 
         style={{width: (100 / this.props.col) + '%',
                 height: (100 / this.props.row) + '%'
               }}
