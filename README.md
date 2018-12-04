@@ -2,7 +2,7 @@
 
 1. download Node.js and source code.
 
-2. install mudules using npm.
+2. install modules using npm.
 
 ```
 $ cd gen-graph
