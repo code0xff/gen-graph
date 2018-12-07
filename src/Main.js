@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from './Header';
 import Map from './Map';
 import Menu from './Menu';
 
@@ -20,32 +21,35 @@ class Main extends Component {
    render() {
     return (
       <div>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <Map 
-                row={this.state.row} 
-                col={this.state.col} 
-                width={this.state.width}
-                height={this.state.height}
-                />
-              </td>
-              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-              <td><Menu
-                row={this.state.row} 
-                col={this.state.col} 
-                width={this.state.width}
-                height={this.state.height}
-                border={this.state.border}
-                setRow={this._setRow}
-                setCol={this._setCol}
-                setWidth={this._setWidth}
-                setHeight={this._setHeight}
-                /></td>
-            </tr>
-          </tbody>
-        </table>
+        <Header />
+        <div style={{paddingTop: '50px'}}>
+          <table style={{margin: 'auto'}}>
+            <tbody>
+              <tr>
+                <td>
+                  <Map 
+                  row={this.state.row} 
+                  col={this.state.col} 
+                  width={this.state.width}
+                  height={this.state.height}
+                  />
+                </td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><Menu
+                  row={this.state.row} 
+                  col={this.state.col} 
+                  width={this.state.width}
+                  height={this.state.height}
+                  border={this.state.border}
+                  setRow={this._setRow}
+                  setCol={this._setCol}
+                  setWidth={this._setWidth}
+                  setHeight={this._setHeight}
+                  /></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }
