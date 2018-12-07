@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
+import './Menu.css';
 
 class Menu extends Component {
   static propTypes = {
@@ -10,7 +11,8 @@ class Menu extends Component {
     row: PropTypes.number.isRequired,
     col: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired
+    height: PropTypes.number.isRequired,
+    mapList: PropTypes.array.isRequired
   };
 
   _setRow = (e) => {
@@ -49,6 +51,12 @@ class Menu extends Component {
     }
     this.props.setHeight(heightSize);
   }
+  _setMapList = () => {
+    let mapList = this.props.mapList;
+    return (mapList.map((type) => {
+      return (<div key={type}><input id={type} onClick={this.props.updateMapSet} type='checkbox'></input>{type}</div>)
+    }));
+  }
 
   render(){
     return (
@@ -70,6 +78,20 @@ class Menu extends Component {
           <tr>
             <td>height</td>
             <td><input id='height' onChange={this._setHeigh} type='number' max='1000' defaultValue={this.props.height }></input></td>
+          </tr>
+          <tr>
+            <td colSpan='2'>
+              <div style={{textAlign: 'center'}}>
+                select map chip
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan='2'>
+              <div className='MenuList'>
+                {this._setMapList()}
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

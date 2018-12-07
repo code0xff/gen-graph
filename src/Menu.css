@@ -1,0 +1,7 @@
+.MenuList {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: darkgrey;
+  height: 100px;
+  overflow-y: auto;
+}

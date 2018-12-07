@@ -3,7 +3,7 @@ import Map from './Map';
 import Menu from './Menu';
 
 class Main extends Component {
-  state = { row: 5, col: 5, width: 300, height: 300, menu: 'create'}
+  state = { row: 5, col: 5, width: 300, height: 300}
 
   _setRow = (rowSize) => {
     this.setState({row: rowSize});
@@ -29,6 +29,9 @@ class Main extends Component {
                 col={this.state.col} 
                 width={this.state.width}
                 height={this.state.height}
+                setBlockType={this.props.setBlockType}
+                getBlockType={this.props.getBlockType}
+                mapSet={this.props.mapSet}
                 />
               </td>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -42,6 +45,8 @@ class Main extends Component {
                 setCol={this._setCol}
                 setWidth={this._setWidth}
                 setHeight={this._setHeight}
+                mapList={this.props.mapList}
+                updateMapSet={this.props.updateMapSet}
                 /></td>
             </tr>
           </tbody>

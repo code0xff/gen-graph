@@ -1,42 +1,7 @@
 import React, { Component } from 'react';
 import './Map.css';
-import empty from './resources/empty.jpg';
-import grass from './resources/grass.jpg';
-import water from './resources/water.jpg';
-import sand from './resources/sand.jpg';
-import town from './resources/town.jpg';
-import tree from './resources/tree.jpg';
-import mountain from './resources/mountain.jpg';
-import well from './resources/well.jpg';
-import drum from './resources/drum.jpg';
 
 class Map extends Component {
-  state={}
-  map=[empty, grass, water, sand, town, tree, mountain, well, drum];
-
-  componentDidMount() {
-    let obj, rowId, colId;
-    for (let i = 1; i <= 50; i++) {
-      rowId = i < 10 ? '0' + i : i;
-      for (let j = 1; j <= 50; j++) {
-        colId = j < 10 ? '0' + j : j;
-        obj = {};
-        obj[rowId + '' + colId] = 0;
-        this.setState(obj);
-      }
-    }
-  }
-
-  _setBlockType = (e) => {
-    let obj = {};
-    let type = this.state[e.target.id] + 1;
-    if (type >= this.map.length) {
-      type %= this.map.length;
-    }
-    obj[e.target.id] = type;
-    this.setState(obj);
-  }
-
   _createFrame = () => {
     let cols = [];
     for (let i = 1; i <= this.props.col; i++) {
@@ -50,16 +15,16 @@ class Map extends Component {
       let blocks = cols.map((colIndex) => {
         let id = (rowIndex < 10 ? '0' + rowIndex : rowIndex) + '' + (colIndex < 10 ? '0' + colIndex : colIndex);
         return <td className='Block'
-        onClick={this._setBlockType}
+        onClick={this.props.setBlockType}
         key={id} id={id} 
         style={{width: (100 / this.props.col) + '%',
                 height: (100 / this.props.row) + '%'
               }}
-        background={this.map[this.state[id]]}
+        background={this.props.mapSet[this.props.getBlockType(id)]}
         >
         </td>});
 
-      return (<tr key ={rowIndex} id={rowIndex}>{blocks}</tr>)
+      return (<tr key={rowIndex} id={rowIndex}>{blocks}</tr>)
     });
   }
 
