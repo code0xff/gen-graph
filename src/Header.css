@@ -1,0 +1,24 @@
+.Header {
+  background-color: #FFFFFF;
+  margin: 0px;
+  padding: 50px;
+  opacity: 0.9;
+}
+
+.MenuContainer {
+  width: 100%;
+}
+
+.MenuBox {
+  text-align: center;
+  font-size: 30px;
+}
+
+.MenuLink {
+  color: darkgray;
+}
+
+.MenuLink:hover {
+  color: black;
+  cursor: pointer;
+}
