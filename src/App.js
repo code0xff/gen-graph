@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './Header';
 import Main from './Main';
+import Asset from './Asset';
 import empty from './resources/empty.jpg';
 import grass from './resources/grass.jpg';
 import water from './resources/water.jpg';
@@ -78,7 +79,7 @@ class App extends Component {
         mapSet={this.mapSet}
         mapList={this.mapList}
         /> 
-        : <div style={{color: 'red', textAlign: 'center'}}>menu is not selected yet.</div>}
+        : <Asset />}
       </div>
     );
   }
