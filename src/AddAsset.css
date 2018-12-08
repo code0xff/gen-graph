@@ -1,0 +1,7 @@
+.ImageBox {
+  background-color: #ffffff;
+  width: 150px;
+  height: 150px;
+  border: 1px solid darkgrey;
+  margin: auto;
+}
