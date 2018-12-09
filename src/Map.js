@@ -20,7 +20,7 @@ class Map extends Component {
         style={{width: (100 / this.props.col) + '%',
                 height: (100 / this.props.row) + '%'
               }}
-        background={this.props.mapSet[this.props.getBlockType(id)]}
+        background={'/images/' + this.props.mapSet[this.props.getBlockType(id)] + '.jpg'}
         >
         </td>});
 

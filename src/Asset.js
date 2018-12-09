@@ -16,7 +16,10 @@ class Asset extends Component {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </td>
               <td>
-                <AssetList />
+                <AssetList 
+                mapList={this.props.mapList}
+                mapSetList={this.props.mapSetList}
+                />
               </td>
             </tr>
           </tbody>

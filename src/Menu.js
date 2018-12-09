@@ -80,6 +80,9 @@ class Menu extends Component {
             <td><input id='height' onChange={this._setHeigh} type='number' max='1000' defaultValue={this.props.height }></input></td>
           </tr>
           <tr>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
             <td colSpan='2'>
               <div style={{textAlign: 'center'}}>
                 select map chip

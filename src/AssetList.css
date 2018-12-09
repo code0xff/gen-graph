@@ -5,3 +5,9 @@
   width: 200px;
   background-color: #ffffff;
 }
+
+.mapListImage {
+  width: 15px;
+  height: 15px;
+  border: 1px solid darkgrey;
+}

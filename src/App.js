@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './App.css';
 import Header from './Header';
 import Main from './Main';
 import Asset from './Asset';
-import empty from './resources/empty.jpg';
-import grass from './resources/grass.jpg';
-import water from './resources/water.jpg';
-import sand from './resources/sand.jpg';
-import town from './resources/town.jpg';
-import tree from './resources/tree.jpg';
-import mountain from './resources/mountain.jpg';
-import well from './resources/well.jpg';
-import drum from './resources/drum.jpg';
 
 class App extends Component {
-  state={selected: 0}
-  mapSetNameIndex=['empty'];
-  mapSet=[empty];
-  mapList=['grass', 'water', 'sand', 'town', 'tree', 'mountain', 'well', 'drum'];
-  mapSetList = {'grass': grass, 'water': water, 'sand': sand, 'town': town, 'tree': tree, 'mountain': mountain, 'well': well, 'drum': drum};
+  state = {selected: 0}
+
+  mapList = [];
+  mapSetList = {};
+
+  mapSetNameIndex = ['empty'];
+  mapSet = ['empty'];
 
   componentDidMount() {
+    axios.get('/assets')
+    .then((response) => {
+      this.mapList = response.data.mapList;
+      this.mapSetList = response.data.mapSetList;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
     let obj, rowId, colId;
     for (let i = 1; i <= 50; i++) {
       rowId = i < 10 ? '0' + i : i;
@@ -79,7 +82,10 @@ class App extends Component {
         mapSet={this.mapSet}
         mapList={this.mapList}
         /> 
-        : <Asset />}
+        : <Asset 
+        mapList={this.mapList}
+        mapSetList={this.mapSetList}
+        />}
       </div>
     );
   }
