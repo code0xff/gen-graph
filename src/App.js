@@ -6,7 +6,7 @@ import Main from './Main';
 import Asset from './Asset';
 
 class App extends Component {
-  state = {selected: 0}
+  state = {selected: 0, row: 5, col: 5, width: 300, height: 300}
 
   mapList = [];
   mapSetList = {};
@@ -70,6 +70,22 @@ class App extends Component {
     this.setState({selected: parseInt(e.target.id)});
   }
 
+  _setRow = (row) => {
+    this.setState({row});
+  }
+
+  _setCol = (col) => {
+    this.setState({col});
+  }
+
+  _setWidth = (width) => {
+    this.setState({width});
+  }
+
+  _setHeight = (height) => {
+    this.setState({height});
+  }
+
   render() {
     return (
       <div>
@@ -81,6 +97,14 @@ class App extends Component {
         updateMapSet={this._updateMapSet}
         mapSet={this.mapSet}
         mapList={this.mapList}
+        row={this.state.row}
+        col={this.state.col}
+        width={this.state.width}
+        height={this.state.height}
+        setRow={this._setRow}
+        setCol={this._setCol}
+        setWidth={this._setWidth}
+        setHeight={this._setHeight}
         /> 
         : <Asset 
         mapList={this.mapList}
