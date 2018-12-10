@@ -6,23 +6,23 @@ import Main from './Main';
 import Asset from './Asset';
 
 class App extends Component {
-  state = {selected: 0, row: 5, col: 5, width: 300, height: 300}
-
-  mapList = [];
-  mapSetList = {};
+  state = {selected: 0, row: 5, col: 5, width: 300, height: 300, mapList: [], mapSetList: {}}
 
   mapSetNameIndex = ['empty'];
   mapSet = ['empty'];
 
-  componentDidMount() {
+  _reloadMapList = () => {
     axios.get('/assets')
     .then((response) => {
-      this.mapList = response.data.mapList;
-      this.mapSetList = response.data.mapSetList;
+      this.setState({mapList: response.data.mapList, mapSetList: response.data.mapSetList});
     })
     .catch((err) => {
       console.log(err);
     });
+  }
+
+  componentDidMount() {
+    this._reloadMapList();
 
     let obj, rowId, colId;
     for (let i = 1; i <= 50; i++) {
@@ -39,7 +39,7 @@ class App extends Component {
   _updateMapSet = (e) => {
     if (e.target.checked) {
       if (this.mapSetNameIndex.indexOf(e.target.id) === -1) {
-        this.mapSet.push(this.mapSetList[e.target.id]);
+        this.mapSet.push(this.state.mapSetList[e.target.id]);
         this.mapSetNameIndex.push(e.target.id);
       }
     } else {
@@ -96,7 +96,7 @@ class App extends Component {
         getBlockType={this._getBlockType}
         updateMapSet={this._updateMapSet}
         mapSet={this.mapSet}
-        mapList={this.mapList}
+        mapList={this.state.mapList}
         row={this.state.row}
         col={this.state.col}
         width={this.state.width}
@@ -107,8 +107,9 @@ class App extends Component {
         setHeight={this._setHeight}
         /> 
         : <Asset 
-        mapList={this.mapList}
-        mapSetList={this.mapSetList}
+        mapList={this.state.mapList}
+        mapSetList={this.state.mapSetList}
+        reloadMapList={this._reloadMapList}
         />}
       </div>
     );

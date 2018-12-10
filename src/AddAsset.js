@@ -21,6 +21,7 @@ class AddAsset extends Component {
     this._fileUpload()
     .then((response)=>{
       if(response.data.result === 'success') {
+        this.props.reloadMapList();
         alert('success!');
       } else {
 

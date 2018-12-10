@@ -10,7 +10,9 @@ class Asset extends Component {
           <tbody>
             <tr>
               <td>
-                <AddAsset />
+                <AddAsset 
+                reloadMapList={this.props.reloadMapList}
+                />
               </td>
               <td>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
