@@ -33,6 +33,7 @@ _fileUpload = () => {
   const url = '/assets';
   const formData = new FormData();
   formData.append('assetFile', this.state.assetFile);
+  formData.append('assetName', this.state.assetName);
   const config = {
     headers: {
       'content-type': 'multipart/form-data'
