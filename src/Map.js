@@ -17,8 +17,8 @@ class Map extends Component {
         return <td className='Block'
         onClick={this.props.setBlockType}
         key={id} id={id} 
-        style={{width: (100 / this.props.col) + '%',
-                height: (100 / this.props.row) + '%'
+        style={{width: parseInt(100 / this.props.col) + '%',
+                height: parseInt(100 / this.props.row) + '%'
               }}
         background={'/images/' + this.props.mapSet[this.props.getBlockType(id)] + '.jpg'}
         >
