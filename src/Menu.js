@@ -54,7 +54,9 @@ class Menu extends Component {
   _setMapList = () => {
     let mapList = this.props.mapList;
     return (mapList.map((type) => {
-      return (<div key={type}><input id={type} onClick={this.props.updateMapSet} type='checkbox'></input>{type}</div>)
+      return (<div key={type}><input id={type} onClick={this.props.updateMapSet} type='checkbox'></input>
+      <img alt={type} className='MapListImage' src={'/images/' + this.props.mapSetList[type] + '.jpg'}></img>&nbsp;
+      {type}</div>)
     }));
   }
 
