@@ -1,7 +1,7 @@
 .AssetList {
   border: 1px solid darkgrey;
   overflow-y: scroll;
-  height: 300px;
+  height: 250px;
   width: 200px;
   background-color: #ffffff;
 }
