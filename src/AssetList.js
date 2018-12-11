@@ -18,6 +18,11 @@ class AssetList extends Component {
   }
 
   _deleteMapChip = () => {
+    if (this.deleteList.length === 0) {
+      alert('please select map chip');
+      return;
+    }
+
     axios.delete('/assets', {data: {deleteList: this.deleteList}})
     .then(res => {
       if (res.data.result === 'success') {
