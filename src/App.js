@@ -96,6 +96,7 @@ class App extends Component {
         getBlockType={this._getBlockType}
         updateMapSet={this._updateMapSet}
         mapSet={this.mapSet}
+        mapSetNameIndex={this.mapSetNameIndex}
         mapList={this.state.mapList}
         mapSetList={this.state.mapSetList}
         row={this.state.row}
