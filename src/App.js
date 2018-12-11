@@ -97,6 +97,7 @@ class App extends Component {
         updateMapSet={this._updateMapSet}
         mapSet={this.mapSet}
         mapList={this.state.mapList}
+        mapSetList={this.state.mapSetList}
         row={this.state.row}
         col={this.state.col}
         width={this.state.width}
