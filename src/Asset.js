@@ -43,6 +43,7 @@ class Asset extends Component {
               </td>
               <td>
                 <AssetList 
+                reloadMapList={this.props.reloadMapList}
                 mapList={this.props.mapList}
                 mapSetList={this.props.mapSetList}
                 setImageSource={this._setImageSource}
