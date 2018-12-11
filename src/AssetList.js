@@ -21,8 +21,9 @@ class AssetList extends Component {
     axios.delete('/assets', {data: {deleteList: this.deleteList}})
     .then(res => {
       if (res.data.result === 'success') {
-        alert('success');
         this.props.reloadMapList();
+        this.deleteList = [];
+        alert('success');
       }
     })
     .catch(err => {console.log(err)});
