@@ -5,3 +5,9 @@
   height: 110px;
   overflow-y: auto;
 }
+
+.MapListImage {
+  width: 12px;
+  height: 12px;
+  border: 1px solid darkgrey;
+}
