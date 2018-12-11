@@ -31,6 +31,7 @@ class Main extends Component {
                 setWidth={this.props.setWidth}
                 setHeight={this.props.setHeight}
                 mapList={this.props.mapList}
+                mapSetList={this.props.mapSetList}
                 updateMapSet={this.props.updateMapSet}
                 /></td>
             </tr>
