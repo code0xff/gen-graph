@@ -33,6 +33,7 @@ class Main extends Component {
                 mapList={this.props.mapList}
                 mapSetList={this.props.mapSetList}
                 updateMapSet={this.props.updateMapSet}
+                mapSetNameIndex={this.props.mapSetNameIndex}
                 /></td>
             </tr>
           </tbody>
