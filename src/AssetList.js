@@ -4,15 +4,15 @@ import axios from 'axios';
 
 class AssetList extends Component {
   _selectType = (e) => {
-    this.props.setImageSource('/images/' + this.props.mapSetList[e.target.id] + '.jpg');
+    this.props.setImageSource('/images/' + this.props.mapSetList[this.props.mapList[e.target.id]] + '.jpg');
   }
 
   deleteList = [];
   _checkDeleteType = (e) => {
     if (e.target.checked) {
-      this.deleteList.push(e.target.id);
+      this.deleteList.push(this.props.mapList[e.target.id]);
     } else {
-      let index = this.deleteList.indexOf(e.target.id);
+      let index = this.deleteList.indexOf(this.props.mapList[e.target.id]);
       this.deleteList.splice(index, 1);
     }
   }
@@ -36,10 +36,10 @@ class AssetList extends Component {
   
   _showMapList = () => {
     let mapList = this.props.mapList;
-    return (mapList.map((type) => {
-      return <div className='AssetListContent' id={type} key={type} onClick={this._selectType}>
-      <input id={type} type='checkbox' onClick={this._checkDeleteType}></input>
-      <img alt={type} className='MapListImage' src={'/images/' + this.props.mapSetList[type] + '.jpg'}></img>&nbsp;
+    return (mapList.map((type, index) => {
+      return <div className='AssetListContent' id={index} key={type} onClick={this._selectType}>
+      <input id={index} type='checkbox' onClick={this._checkDeleteType}></input>
+      <img id={index} alt={type} className='MapListImage' src={'/images/' + this.props.mapSetList[type] + '.jpg'}></img>&nbsp;
       {type}</div>;
     }));
   }

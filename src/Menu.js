@@ -24,6 +24,7 @@ class Menu extends Component {
     }
     this.props.setRow(rowSize);
   }
+
   _setCol = (e) => {
     let colSize = e.target.value === '' ? 0 : parseInt(e.target.value);
     if (colSize > 50) {
@@ -33,6 +34,7 @@ class Menu extends Component {
     }
     this.props.setCol(colSize);
   }
+
   _setWidth = (e) => {
     let widthSize = e.target.value === '' ? 0 : parseInt(e.target.value);
     if (widthSize > 1000) {
@@ -42,6 +44,7 @@ class Menu extends Component {
     }
     this.props.setWidth(widthSize);
   }
+
   _setHeigh = (e) => {
     let heightSize = e.target.value === '' ? 0 : parseInt(e.target.value);
     if (heightSize > 1000) {
@@ -53,14 +56,15 @@ class Menu extends Component {
   }
 
   _setMapList = () => {
-    return (this.props.mapList.map((type) => {
+    return (this.props.mapList.map((type, index) => {
       return (
       <div className='MapSetContent'
       key={type} 
-      id={type} 
+      id={index} 
       onClick={this.props.updateMapSet}
       >
       <img alt={type} 
+      id={index}
       className='MapListImage' 
       src={'/images/' + this.props.mapSetList[type] + '.jpg'}></img>&nbsp;
       {type}</div>)
@@ -97,7 +101,12 @@ class Menu extends Component {
           <tr>
             <td colSpan='2'>
               <div style={{textAlign: 'center'}}>
-                select map chip
+                map chip
+                &nbsp;
+                <img 
+                alt='seleted' 
+                className='MapListImage' 
+                src={'/images/' + this.props.mapSetList[this.props.mapList[this.props.selectedMapSet]] + '.jpg'}/>
               </div>
             </td>
           </tr>
@@ -111,7 +120,7 @@ class Menu extends Component {
           <tr>
             <td colSpan='2'>
               <div style={{textAlign: 'center'}}>
-                select edit mode
+                edit mode
               </div>
             </td>
           </tr>
@@ -137,7 +146,9 @@ class Menu extends Component {
           </tr>
           <tr>
             <td colSpan='2'>
-            <button onClick={this._initialize}>clear</button>&nbsp;&nbsp;<button>save</button>
+            <button onClick={this._initialize}>clear</button>
+            &nbsp;&nbsp;
+            <button onClick={this.props.saveMap}>save</button>
             </td>
           </tr>
         </tbody>

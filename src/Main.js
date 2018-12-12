@@ -16,7 +16,7 @@ class Main extends Component {
                 width={this.props.width}
                 height={this.props.height}
                 setBlockType={this.props.setBlockType}
-                getBlockType={this.props.getBlockType}
+                getTypeImage={this.props.getTypeImage}
                 mode={this.props.mode}
                 />
               </td>
@@ -37,6 +37,7 @@ class Main extends Component {
                 mode={this.props.mode}
                 setMode={this.props.setMode}
                 initialize={this.props.initialize}
+                saveMap={this.props.saveMap}
                 /></td>
             </tr>
           </tbody>

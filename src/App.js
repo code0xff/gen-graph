@@ -6,7 +6,12 @@ import Main from './Main';
 import Asset from './Asset';
 
 class App extends Component {
-  state = {selected: 0, row: 5, col: 5, width: 300, height: 300, mapList: [], mapSetList: {}, selectedMapSet: 'empty', mode: 'click'}
+  state = {selected: 0, row: 7, col: 7, width: 350, height: 350, mapList: ['empty'], mapSetList: {'empty': 'empty'}, selectedMapSet: 0, mode: 'click'}
+
+  componentDidMount() {
+    this._reloadMapList();
+    this._initialize();    
+  }
 
   _reloadMapList = () => {
     axios.get('/assets')
@@ -25,29 +30,24 @@ class App extends Component {
       for (let j = 1; j <= 50; j++) {
         colId = j < 10 ? '0' + j : j;
         obj = {};
-        obj[rowId + '' + colId] = 'empty';
+        obj[rowId + '' + colId] = 0;
         this.setState(obj);
       }
     }
   }
 
-  componentDidMount() {
-    this._reloadMapList();
-    this._initialize();    
-  }
-
   _updateMapSet = (e) => {
-    this.setState({selectedMapSet: e.target.id});
+    this.setState({selectedMapSet: parseInt(e.target.id)});
   }
 
   _setBlockType = (e) => {
     let obj = {};
-    obj[e.target.id] = this.state.mapSetList[this.state.selectedMapSet];
+    obj[e.target.id] = this.state.selectedMapSet;
     this.setState(obj);
   }
   
-  _getBlockType = (id) => {
-    return this.state[id];
+  _getTypeImage = (id) => {
+    return this.state.mapSetList[this.state.mapList[this.state[id]]];
   }
 
   menuList = ['create', 'asset']
@@ -75,6 +75,39 @@ class App extends Component {
     this.setState({mode: e.target.value});
   }
 
+  _saveMap = () => {
+    let fileName = window.prompt('please input file name');
+    if (fileName === '') {
+      alert('fail to save');
+      return;
+    }
+
+    let map = '';
+    let rowId, colId;
+    for (let i = 1; i <= this.state.row; i++) {
+      rowId = i < 10 ? '0' + i : i;
+      for (let j = 1; j <= this.state.col; j++) {
+        colId = j < 10 ? '0' + j : j;
+        map += this.state[rowId + '' + colId];
+      }
+    }
+
+    axios({url: '/assets/save',
+    method: 'POST',
+    data: {map: map, fileName: fileName, row: this.state.row, col: this.state.col},
+    responseType: 'blob',
+    })
+    .then(response => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', fileName + '.txt');
+      document.body.appendChild(link);
+      link.click();
+    })
+    .catch(err => {console.log(err)});
+  }
+
   render() {
     return (
       <div>
@@ -82,7 +115,7 @@ class App extends Component {
         {this.state.selected === 0 ? 
         <Main 
         setBlockType={this._setBlockType} 
-        getBlockType={this._getBlockType}
+        getTypeImage={this._getTypeImage}
         updateMapSet={this._updateMapSet}
         initialize={this._initialize}
         selectedMapSet={this.state.selectedMapSet}
@@ -98,6 +131,7 @@ class App extends Component {
         setHeight={this._setHeight}
         mode={this.state.mode}
         setMode={this._setMode}
+        saveMap={this._saveMap}
         /> 
         : <Asset 
         mapList={this.state.mapList}

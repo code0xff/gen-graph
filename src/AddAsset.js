@@ -28,7 +28,7 @@ class AddAsset extends Component {
 }
 
   _fileUpload = () => {
-    const url = '/assets';
+    const url = '/assets/upload';
     const formData = new FormData();
     formData.append('assetFile', this.props.assetFile);
     formData.append('assetName', this.props.assetName);

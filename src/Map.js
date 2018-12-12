@@ -21,7 +21,7 @@ class Map extends Component {
         style={{width: parseInt(100 / this.props.col) + '%',
                 height: parseInt(100 / this.props.row) + '%'
               }}
-        background={'/images/' + this.props.getBlockType(id) + '.jpg'}
+        background={'/images/' + this.props.getTypeImage(id) + '.jpg'}
         >
         </td>});
 
