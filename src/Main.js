@@ -17,7 +17,6 @@ class Main extends Component {
                 height={this.props.height}
                 setBlockType={this.props.setBlockType}
                 getBlockType={this.props.getBlockType}
-                mapSet={this.props.mapSet}
                 />
               </td>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -33,7 +32,7 @@ class Main extends Component {
                 mapList={this.props.mapList}
                 mapSetList={this.props.mapSetList}
                 updateMapSet={this.props.updateMapSet}
-                mapSetNameIndex={this.props.mapSetNameIndex}
+                selectedMapSet={this.props.selectedMapSet}
                 /></td>
             </tr>
           </tbody>
