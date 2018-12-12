@@ -34,6 +34,7 @@ class Main extends Component {
                 mapSetList={this.props.mapSetList}
                 updateMapSet={this.props.updateMapSet}
                 selectedMapSet={this.props.selectedMapSet}
+                mode={this.props.mode}
                 setMode={this.props.setMode}
                 /></td>
             </tr>
