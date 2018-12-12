@@ -67,6 +67,12 @@ class Menu extends Component {
     }));
   }
 
+  _initialize = () => {
+    if (window.confirm('If you want to clear map, please click yes. it needs few minutes...')) {
+      this.props.initialize();
+    }
+  }
+
   render(){
     return (
       <table>
@@ -127,6 +133,11 @@ class Menu extends Component {
                 defaultChecked={this.props.mode === 'over' ? 'checked':''}
                 />over
               </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan='2'>
+            <button onClick={this._initialize}>clear</button>&nbsp;&nbsp;<button>save</button>
             </td>
           </tr>
         </tbody>
