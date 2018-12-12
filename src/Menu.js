@@ -112,9 +112,20 @@ class Menu extends Component {
           <tr>
             <td colSpan='2'>
               <div className='ModeList' style={{}}>
-                <input type='radio' name='mode' value='click' onClick={this.props.setMode} defaultChecked='checked'/>click
+                <input 
+                type='radio' 
+                name='mode' 
+                value='click' 
+                onClick={this.props.setMode}
+                defaultChecked={this.props.mode === 'click' ? 'checked':''}/>click
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type='radio' name='mode' value='over' onClick={this.props.setMode}/>over
+                <input 
+                type='radio' 
+                name='mode' 
+                value='over' 
+                onClick={this.props.setMode}
+                defaultChecked={this.props.mode === 'over' ? 'checked':''}
+                />over
               </div>
             </td>
           </tr>
