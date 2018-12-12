@@ -89,9 +89,6 @@ class Menu extends Component {
             <td><input id='height' onChange={this._setHeigh} type='number' max='1000' defaultValue={this.props.height }></input></td>
           </tr>
           <tr>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
             <td colSpan='2'>
               <div style={{textAlign: 'center'}}>
                 select map chip
@@ -102,6 +99,22 @@ class Menu extends Component {
             <td colSpan='2'>
               <div className='MenuList'>
                 {this._setMapList()}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan='2'>
+              <div style={{textAlign: 'center'}}>
+                select edit mode
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan='2'>
+              <div className='ModeList' style={{}}>
+                <input type='radio' name='mode' value='click' onClick={this.props.setMode} defaultChecked='checked'/>click
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type='radio' name='mode' value='over' onClick={this.props.setMode}/>over
               </div>
             </td>
           </tr>
