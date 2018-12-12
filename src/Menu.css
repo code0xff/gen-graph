@@ -2,8 +2,15 @@
   background-color: #ffffff;
   border: 1px solid;
   border-color: darkgrey;
-  height: 110px;
+  height: 100px;
   overflow-y: auto;
+}
+
+.ModeList {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: darkgrey;
+  text-align: center;
 }
 
 .MapSetContent:hover {
