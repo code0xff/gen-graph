@@ -15,7 +15,8 @@ class Map extends Component {
       let blocks = cols.map((colIndex) => {
         let id = (rowIndex < 10 ? '0' + rowIndex : rowIndex) + '' + (colIndex < 10 ? '0' + colIndex : colIndex);
         return <td className='Block'
-        onClick={this.props.setBlockType}
+        onClick={this.props.mode === 'click' ? this.props.setBlockType : null}
+        onMouseOver={this.props.mode === 'over' ? this.props.setBlockType : null}
         key={id} id={id} 
         style={{width: parseInt(100 / this.props.col) + '%',
                 height: parseInt(100 / this.props.row) + '%'
