@@ -36,6 +36,7 @@ class Main extends Component {
                 selectedMapSet={this.props.selectedMapSet}
                 mode={this.props.mode}
                 setMode={this.props.setMode}
+                initialize={this.props.initialize}
                 /></td>
             </tr>
           </tbody>
