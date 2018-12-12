@@ -8,8 +8,7 @@ import Asset from './Asset';
 class App extends Component {
   state = {selected: 0, row: 5, col: 5, width: 300, height: 300, mapList: [], mapSetList: {}}
 
-  mapSetNameIndex = ['empty'];
-  mapSet = ['empty'];
+  selectedMapSet = 'empty';
 
   _reloadMapList = () => {
     axios.get('/assets')
@@ -30,34 +29,19 @@ class App extends Component {
       for (let j = 1; j <= 50; j++) {
         colId = j < 10 ? '0' + j : j;
         obj = {};
-        obj[rowId + '' + colId] = 0;
+        obj[rowId + '' + colId] = 'empty';
         this.setState(obj);
       }
     }
   }
 
   _updateMapSet = (e) => {
-    if (e.target.checked) {
-      if (this.mapSetNameIndex.indexOf(e.target.id) === -1) {
-        this.mapSet.push(this.state.mapSetList[e.target.id]);
-        this.mapSetNameIndex.push(e.target.id);
-      }
-    } else {
-      let index = this.mapSetNameIndex.indexOf(e.target.id);
-      if (index !== -1) {
-        this.mapSet.splice(index, 1);
-        this.mapSetNameIndex.splice(index, 1);
-      }
-    }
+    this.selectedMapSet = e.target.id;
   }
 
   _setBlockType = (e) => {
     let obj = {};
-    let type = this.state[e.target.id] + 1;
-    if (type >= this.mapSet.length) {
-      type %= this.mapSet.length;
-    }
-    obj[e.target.id] = type;
+    obj[e.target.id] = this.state.mapSetList[this.selectedMapSet];
     this.setState(obj);
   }
   
@@ -95,8 +79,7 @@ class App extends Component {
         setBlockType={this._setBlockType} 
         getBlockType={this._getBlockType}
         updateMapSet={this._updateMapSet}
-        mapSet={this.mapSet}
-        mapSetNameIndex={this.mapSetNameIndex}
+        selectedMapSet={this.selectedMapSet}
         mapList={this.state.mapList}
         mapSetList={this.state.mapSetList}
         row={this.state.row}
