@@ -6,9 +6,7 @@ import Main from './Main';
 import Asset from './Asset';
 
 class App extends Component {
-  state = {selected: 0, row: 5, col: 5, width: 300, height: 300, mapList: [], mapSetList: {}, mode: 'click'}
-
-  selectedMapSet = 'empty';
+  state = {selected: 0, row: 5, col: 5, width: 300, height: 300, mapList: [], mapSetList: {}, selectedMapSet: 'empty', mode: 'click'}
 
   _reloadMapList = () => {
     axios.get('/assets')
@@ -20,9 +18,7 @@ class App extends Component {
     });
   }
 
-  componentDidMount() {
-    this._reloadMapList();
-
+  _initialize = () => {
     let obj, rowId, colId;
     for (let i = 1; i <= 50; i++) {
       rowId = i < 10 ? '0' + i : i;
@@ -35,13 +31,18 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    this._reloadMapList();
+    this._initialize();    
+  }
+
   _updateMapSet = (e) => {
-    this.selectedMapSet = e.target.id;
+    this.setState({selectedMapSet: e.target.id});
   }
 
   _setBlockType = (e) => {
     let obj = {};
-    obj[e.target.id] = this.state.mapSetList[this.selectedMapSet];
+    obj[e.target.id] = this.state.mapSetList[this.state.selectedMapSet];
     this.setState(obj);
   }
   
@@ -83,7 +84,8 @@ class App extends Component {
         setBlockType={this._setBlockType} 
         getBlockType={this._getBlockType}
         updateMapSet={this._updateMapSet}
-        selectedMapSet={this.selectedMapSet}
+        initialize={this._initialize}
+        selectedMapSet={this.state.selectedMapSet}
         mapList={this.state.mapList}
         mapSetList={this.state.mapSetList}
         row={this.state.row}
