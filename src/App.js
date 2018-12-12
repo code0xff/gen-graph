@@ -6,7 +6,7 @@ import Main from './Main';
 import Asset from './Asset';
 
 class App extends Component {
-  state = {selected: 0, row: 5, col: 5, width: 300, height: 300, mapList: [], mapSetList: {}}
+  state = {selected: 0, row: 5, col: 5, width: 300, height: 300, mapList: [], mapSetList: {}, mode: 'click'}
 
   selectedMapSet = 'empty';
 
@@ -70,6 +70,10 @@ class App extends Component {
     this.setState({height});
   }
 
+  _setMode =(e) => {
+    this.setState({mode: e.target.value});
+  }
+
   render() {
     return (
       <div>
@@ -90,6 +94,8 @@ class App extends Component {
         setCol={this._setCol}
         setWidth={this._setWidth}
         setHeight={this._setHeight}
+        mode={this.state.mode}
+        setMode={this._setMode}
         /> 
         : <Asset 
         mapList={this.state.mapList}
