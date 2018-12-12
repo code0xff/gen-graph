@@ -6,6 +6,11 @@
   overflow-y: auto;
 }
 
+.MapSetContent:hover {
+  cursor: pointer;
+  background-color: rgb(200, 200, 200);
+}
+
 .MapListImage {
   width: 12px;
   height: 12px;
