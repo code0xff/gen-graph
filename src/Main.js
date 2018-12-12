@@ -17,6 +17,7 @@ class Main extends Component {
                 height={this.props.height}
                 setBlockType={this.props.setBlockType}
                 getBlockType={this.props.getBlockType}
+                mode={this.props.mode}
                 />
               </td>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -33,6 +34,7 @@ class Main extends Component {
                 mapSetList={this.props.mapSetList}
                 updateMapSet={this.props.updateMapSet}
                 selectedMapSet={this.props.selectedMapSet}
+                setMode={this.props.setMode}
                 /></td>
             </tr>
           </tbody>
