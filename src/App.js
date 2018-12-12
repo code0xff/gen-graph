@@ -5,6 +5,16 @@ import Header from './Header';
 import Main from './Main';
 import Asset from './Asset';
 
+let mouseDown = 0;
+
+document.body.onmousedown = () => { 
+    mouseDown = 1;
+}
+
+document.body.onmouseup = () => {
+    mouseDown = 0;
+}
+
 class App extends Component {
   state = {selected: 0, row: 7, col: 7, width: 350, height: 350, mapList: ['empty'], mapSetList: {'empty': 'empty'}, selectedMapSet: 0, mode: 'click'}
 
@@ -41,9 +51,11 @@ class App extends Component {
   }
 
   _setBlockType = (e) => {
-    let obj = {};
-    obj[e.target.id] = this.state.selectedMapSet;
-    this.setState(obj);
+    if ((this.state.mode === 'over' && mouseDown === 1) || this.state.mode === 'click') {
+      let obj = {};
+      obj[e.target.id] = this.state.selectedMapSet;
+      this.setState(obj);
+    }
   }
   
   _getTypeImage = (id) => {
