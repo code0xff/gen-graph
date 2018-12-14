@@ -18,9 +18,9 @@ class Map extends Component {
         onClick={this.props.mode === 'click' ? this.props.setBlockType : null}
         onMouseOver={this.props.mode === 'over' ? this.props.setBlockType : null}
         key={id} id={id} 
-        style={{width: parseInt(100 / this.props.col) + '%',
-                height: parseInt(100 / this.props.row) + '%'
-              }}
+        style={{width: parseInt(this.props.width / this.props.col) + 'px',
+                height: parseInt(this.props.height / this.props.row) + 'px',
+                borderWidth: this.props.line + 'px'}}
         background={'/images/' + this.props.getTypeImage(id) + '.jpg'}
         >
         </td>});
@@ -32,10 +32,7 @@ class Map extends Component {
   render() {
     return (
       <div>
-        <table className='Map' 
-          style={{width: this.props.width + 'px',
-                  height: this.props.height + 'px'
-          }}>
+        <table style={{borderCollapse: this.props.collapse}}>
           <thead></thead>
           <tbody>
             {this._createFrame()}
