@@ -56,15 +56,15 @@ class Menu extends Component {
   }
 
   _setMapList = () => {
-    return (this.props.mapList.map((type, index) => {
+    return (this.props.mapList.map((type) => {
       return (
       <div className='MapSetContent'
       key={type} 
-      id={index} 
+      id={type} 
       onClick={this.props.updateMapSet}
       >
       <img alt={type} 
-      id={index}
+      id={type}
       className='MapListImage' 
       src={'/images/' + this.props.mapSetList[type] + '.jpg'}></img>&nbsp;
       {type}</div>)
@@ -84,48 +84,60 @@ class Menu extends Component {
         <tbody>
           <tr>
             <td>row</td>
-            <td><input id='row' onChange={this._setRow} type='number' max='50' defaultValue={this.props.row}></input></td>
-          </tr>
-          <tr>
+            <td><input className='Input' id='row' onChange={this._setRow} type='number' max='50' defaultValue={this.props.row}></input></td>
             <td>col</td>
-            <td><input id='col' onChange={this._setCol} type='number' max='50' defaultValue={this.props.col}></input></td>
+            <td><input className='Input' id='col' onChange={this._setCol} type='number' max='50' defaultValue={this.props.col}></input></td>
           </tr>
           <tr>
             <td>width</td>
-            <td><input id='width' onChange={this._setWidth} type='number' max='1000' defaultValue={this.props.width}></input></td>
-          </tr>
-          <tr>
+            <td><input className='Input' id='width' onChange={this._setWidth} type='number' max='1000' defaultValue={this.props.width}></input></td>
             <td>height</td>
-            <td><input id='height' onChange={this._setHeigh} type='number' max='1000' defaultValue={this.props.height }></input></td>
+            <td><input className='Input' id='height' onChange={this._setHeigh} type='number' max='1000' defaultValue={this.props.height }></input></td>
           </tr>
           <tr>
-            <td colSpan='2'>
+            <td>collapse</td>
+            <td>
+              <input type='checkbox' 
+              onClick={this.props.onOffCollapse} 
+              defaultChecked={this.props.collapse === 'collapse' ? 'checked' : ''}>
+              </input></td>
+            <td>line off</td>
+            <td><input 
+            type='checkbox' 
+            onClick={this.props.onOffLine}
+            defaultChecked={this.props.line === 0 ? 'checked' : ''}>
+            </input></td>
+          </tr>
+          <tr>
+            <td colSpan='4'>
               <div style={{textAlign: 'center'}}>
                 map chip
                 &nbsp;
                 <img 
                 alt='seleted' 
                 className='MapListImage' 
-                src={'/images/' + this.props.mapSetList[this.props.mapList[this.props.selectedMapSet]] + '.jpg'}/>
+                src={'/images/' + this.props.mapSetList[this.props.selectedMapSet] + '.jpg'}/>
               </div>
             </td>
           </tr>
           <tr>
-            <td colSpan='2'>
+            <td colSpan='4'>
               <div className='MenuList'>
                 {this._setMapList()}
               </div>
+              <button id='up' className='Updown' onClick={this.props.editMapChipOrder}>up</button>
+              <button id='down' className='Updown' onClick={this.props.editMapChipOrder}>down</button>
             </td>
           </tr>
           <tr>
-            <td colSpan='2'>
+            <td colSpan='4'>
               <div style={{textAlign: 'center'}}>
                 edit mode
               </div>
             </td>
           </tr>
           <tr>
-            <td colSpan='2'>
+            <td colSpan='4'>
               <div className='ModeList' style={{}}>
                 <input 
                 type='radio' 
@@ -145,7 +157,7 @@ class Menu extends Component {
             </td>
           </tr>
           <tr>
-            <td colSpan='2'>
+            <td colSpan='4'>
             <button onClick={this._initialize}>clear</button>
             &nbsp;&nbsp;
             <button onClick={this.props.saveMap}>save</button>
