@@ -23,3 +23,11 @@
   height: 12px;
   border: 1px solid darkgrey;
 }
+
+.Input {
+  width: 50px;
+}
+
+.Updown {
+  width: 50%;
+}
