@@ -31,3 +31,7 @@
 .Updown {
   width: 50%;
 }
+
+.Mode:hover {
+  cursor: pointer;
+}

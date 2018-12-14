@@ -1,3 +1,8 @@
+.Map {
+  border-spacing: 0px;
+
+}
+
 .Block {
   border: black solid;
   border-collapse: collapse;

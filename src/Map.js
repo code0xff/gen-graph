@@ -20,7 +20,9 @@ class Map extends Component {
         key={id} id={id} 
         style={{width: parseInt(this.props.width / this.props.col) + 'px',
                 height: parseInt(this.props.height / this.props.row) + 'px',
-                borderWidth: this.props.line + 'px'}}
+                borderWidth: this.props.line + 'px',
+                paddingRight: this.props.collapse === 'collapse' ? '0px' : '1px'
+              }}
         background={'/images/' + this.props.getTypeImage(id) + '.jpg'}
         >
         </td>});
@@ -32,7 +34,8 @@ class Map extends Component {
   render() {
     return (
       <div>
-        <table style={{borderCollapse: this.props.collapse}}>
+        <table 
+        style={{borderCollapse: this.props.collapse}}>
           <thead></thead>
           <tbody>
             {this._createFrame()}

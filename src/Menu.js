@@ -139,7 +139,8 @@ class Menu extends Component {
           <tr>
             <td colSpan='4'>
               <div className='ModeList' style={{}}>
-                <input 
+                <input
+                className='Mode'
                 type='radio' 
                 name='mode' 
                 value='click' 
@@ -147,6 +148,7 @@ class Menu extends Component {
                 defaultChecked={this.props.mode === 'click' ? 'checked':''}/>click
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input 
+                className='Mode'
                 type='radio' 
                 name='mode' 
                 value='over' 

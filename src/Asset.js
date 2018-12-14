@@ -18,6 +18,7 @@ class Asset extends Component {
       this._setImageSource(e.target.result);
     }
   }
+  
   _setImageSource = (source) => {
     this.setState({imageSource: source});
   }
