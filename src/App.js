@@ -5,18 +5,19 @@ import Header from './Header';
 import Main from './Main';
 import Asset from './Asset';
 
-let mouseDown = 0;
-
-document.body.onmousedown = () => { 
-    mouseDown = 1;
-}
-
-document.body.onmouseup = () => {
-    mouseDown = 0;
-}
-
 class App extends Component {
-  state = {selected: 0, row: 7, col: 7, width: 350, height: 350, mapList: ['empty'], mapSetList: {'empty': 'empty'}, selectedMapSet: 0, mode: 'click'}
+  state = {selectedMenu: 0, 
+    row: 7, 
+    col: 7, 
+    width: 350,
+    height: 350, 
+    collapse: 'separate',
+    mapList: ['empty'], 
+    mapSetList: {'empty': 'empty'}, 
+    selectedMapSet: 'empty', 
+    mode: 'click',
+    line: 1
+  }
 
   componentDidMount() {
     this._reloadMapList();
@@ -40,18 +41,34 @@ class App extends Component {
       for (let j = 1; j <= 50; j++) {
         colId = j < 10 ? '0' + j : j;
         obj = {};
-        obj[rowId + '' + colId] = 0;
+        obj[rowId + '' + colId] = 'empty';
         this.setState(obj);
       }
     }
   }
 
+  _onOffCollapse = (e) => {
+    if (e.target.checked) {
+      this.setState({collapse: 'collapse'});
+    } else {
+      this.setState({collapse: 'separate'});
+    }
+  }
+
+  _onOffLine = (e) => {
+    if (e.target.checked) {
+      this.setState({line: 0});
+    } else {
+      this.setState({line: 1});
+    }
+  }
+
   _updateMapSet = (e) => {
-    this.setState({selectedMapSet: parseInt(e.target.id)});
+    this.setState({selectedMapSet: e.target.id});
   }
 
   _setBlockType = (e) => {
-    if ((this.state.mode === 'over' && mouseDown === 1) || this.state.mode === 'click') {
+    if (this.state.mode === 'over' || this.state.mode === 'click') {
       let obj = {};
       obj[e.target.id] = this.state.selectedMapSet;
       this.setState(obj);
@@ -59,12 +76,12 @@ class App extends Component {
   }
   
   _getTypeImage = (id) => {
-    return this.state.mapSetList[this.state.mapList[this.state[id]]];
+    return this.state.mapSetList[this.state[id]];
   }
 
   menuList = ['create', 'asset']
   _menuSelect = (e) => {
-    this.setState({selected: parseInt(e.target.id)});
+    this.setState({selectedMenu: parseInt(e.target.id)});
   }
 
   _setRow = (row) => {
@@ -83,13 +100,36 @@ class App extends Component {
     this.setState({height});
   }
 
-  _setMode =(e) => {
+  _setMode = (e) => {
     this.setState({mode: e.target.value});
+  }
+
+  _editMapChipOrder = (e) => {
+    let selectedIndex = this.state.mapList.indexOf(this.state.selectedMapSet);
+    let mapList = this.state.mapList;
+    if (e.target.id === 'up') {
+      if (selectedIndex === 1) {
+        return;
+      }
+      let temp = mapList[selectedIndex - 1];
+      mapList[selectedIndex - 1] = mapList[selectedIndex];
+      mapList[selectedIndex] = temp;
+      this.setState({mapList, selectedMapSet: this.state.mapList[selectedIndex - 1]});
+    } else if (e.target.id === 'down') {
+      if (selectedIndex === this.state.mapList.length - 1) {
+        return;
+      }
+      let temp = mapList[selectedIndex + 1];
+      mapList[selectedIndex + 1] = mapList[selectedIndex];
+      mapList[selectedIndex] = temp;
+      this.setState({mapList, selectedMapSet: this.state.mapList[selectedIndex + 1]});
+    }
   }
 
   _saveMap = () => {
     let fileName = window.prompt('please input file name');
-    if (fileName === '') {
+
+    if (fileName === '' || fileName === null) {
       alert('fail to save');
       return;
     }
@@ -100,7 +140,7 @@ class App extends Component {
       rowId = i < 10 ? '0' + i : i;
       for (let j = 1; j <= this.state.col; j++) {
         colId = j < 10 ? '0' + j : j;
-        map += this.state[rowId + '' + colId];
+        map += this.state.mapList.indexOf(this.state[rowId + '' + colId]);
       }
     }
 
@@ -110,6 +150,7 @@ class App extends Component {
     responseType: 'blob',
     })
     .then(response => {
+      console.log(response.data);
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
@@ -124,7 +165,7 @@ class App extends Component {
     return (
       <div>
         <Header menuSelect={this._menuSelect}/>
-        {this.state.selected === 0 ? 
+        {this.state.selectedMenu === 0 ? 
         <Main 
         setBlockType={this._setBlockType} 
         getTypeImage={this._getTypeImage}
@@ -144,6 +185,11 @@ class App extends Component {
         mode={this.state.mode}
         setMode={this._setMode}
         saveMap={this._saveMap}
+        collapse={this.state.collapse}
+        line={this.state.line}
+        onOffCollapse={this._onOffCollapse}
+        onOffLine={this._onOffLine}
+        editMapChipOrder={this._editMapChipOrder}
         /> 
         : <Asset 
         mapList={this.state.mapList}
