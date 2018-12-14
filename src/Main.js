@@ -18,6 +18,8 @@ class Main extends Component {
                 setBlockType={this.props.setBlockType}
                 getTypeImage={this.props.getTypeImage}
                 mode={this.props.mode}
+                collapse={this.props.collapse}
+                line={this.props.line}
                 />
               </td>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -38,6 +40,11 @@ class Main extends Component {
                 setMode={this.props.setMode}
                 initialize={this.props.initialize}
                 saveMap={this.props.saveMap}
+                onOffCollapse={this.props.onOffCollapse}
+                onOffLine={this.props.onOffLine}
+                collapse={this.props.collapse}
+                line={this.props.line}
+                editMapChipOrder={this.props.editMapChipOrder}
                 /></td>
             </tr>
           </tbody>
