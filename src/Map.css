@@ -1,5 +1,9 @@
-.Map .Block {
-  border: 1px black solid;
+.Block {
+  border: black solid;
   border-collapse: collapse;
   background-size: cover;
+}
+
+.Block:hover {
+  opacity: 0.5;
 }
