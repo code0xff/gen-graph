@@ -1,12 +1,13 @@
 .Map {
   border-spacing: 0px;
-
 }
 
 .Block {
-  border: black solid;
   border-collapse: collapse;
   background-size: cover;
+  border-style: solid;
+  border-color: black;
+  padding: 0px;
 }
 
 .Block:hover {

@@ -18,10 +18,9 @@ class Map extends Component {
         onClick={this.props.mode === 'click' ? this.props.setBlockType : null}
         onMouseOver={this.props.mode === 'over' ? this.props.setBlockType : null}
         key={id} id={id} 
-        style={{width: parseInt(this.props.width / this.props.col) + 'px',
-                height: parseInt(this.props.height / this.props.row) + 'px',
-                borderWidth: this.props.line + 'px',
-                paddingRight: this.props.collapse === 'collapse' ? '0px' : '1px'
+        style={{width: this.props.width / this.props.col + 'px',
+                height: this.props.height / this.props.row + 'px',
+                borderWidth: this.props.line + 'px'
               }}
         background={'/images/' + this.props.getTypeImage(id) + '.jpg'}
         >
