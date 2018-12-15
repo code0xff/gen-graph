@@ -1,8 +1,35 @@
 import React, { Component } from 'react';
 import Map from './Map';
 import Menu from './Menu';
+import PropTypes from 'prop-types';
 
 class Main extends Component {
+  static propTypes = {
+    row: PropTypes.number.isRequired, 
+    col: PropTypes.number.isRequired, 
+    width: PropTypes.number.isRequired, 
+    height: PropTypes.number.isRequired, 
+    setBlockType: PropTypes.func.isRequired, 
+    getTypeImage: PropTypes.func.isRequired, 
+    mode: PropTypes.string.isRequired, 
+    collapse: PropTypes.string.isRequired, 
+    line: PropTypes.number.isRequired, 
+    setRow: PropTypes.func.isRequired, 
+    setCol: PropTypes.func.isRequired, 
+    setWidth: PropTypes.func.isRequired, 
+    setHeight: PropTypes.func.isRequired, 
+    mapList: PropTypes.array.isRequired, 
+    mapSetList: PropTypes.object.isRequired, 
+    updateMapSet: PropTypes.func.isRequired, 
+    selectedMapSet: PropTypes.string.isRequired, 
+    setMode: PropTypes.func.isRequired, 
+    initialize: PropTypes.func.isRequired, 
+    saveMap: PropTypes.func.isRequired, 
+    onOffCollapse: PropTypes.func.isRequired, 
+    onOffLine: PropTypes.func.isRequired, 
+    editMapChipOrder:  PropTypes.func.isRequired
+  }
+
   render() {
     return (
       <div style={{paddingTop: '50px'}}>

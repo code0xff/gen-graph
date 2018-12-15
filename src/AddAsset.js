@@ -1,8 +1,18 @@
 import React, {Component} from 'react';
 import './AddAsset.css';
 import {post} from 'axios';
+import PropTypes from "prop-types";
 
 class AddAsset extends Component {
+  static propTypes = {
+    assetName: PropTypes.string.isRequired,
+    assetFile: PropTypes.any,
+    reloadMapList: PropTypes.func.isRequired,
+    imageSource: PropTypes.string,
+    setAssetName: PropTypes.func.isRequired,
+    setAssetFile: PropTypes.func.isRequired
+    }
+
   _onFormSubmit = (e) => {
     e.preventDefault();
 

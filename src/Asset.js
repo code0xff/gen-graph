@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import AddAsset from './AddAsset';
 import AssetList from './AssetList';
+import PropTypes from 'prop-types';
 
 class Asset extends Component {
+  static propTypes = {
+    reloadMapList: PropTypes.func.isRequired,
+    mapList: PropTypes.array.isRequired,
+    mapSetList: PropTypes.object.isRequired
+  }
+
   state = {assetName: '', assetFile: null, imageSource: ''}
 
   _setAssetName = (e) => {

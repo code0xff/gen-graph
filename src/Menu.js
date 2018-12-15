@@ -12,7 +12,9 @@ class Menu extends Component {
     col: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    mapList: PropTypes.array.isRequired
+    mapList: PropTypes.array.isRequired,
+    collapse: PropTypes.string.isRequired,
+    line: PropTypes.number.isRequired,
   };
 
   _setRow = (e) => {

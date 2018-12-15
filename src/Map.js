@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
 import './Map.css';
+import PropTypes from 'prop-types';
 
 class Map extends Component {
+  static propTypes = {
+    row: PropTypes.number.isRequired,
+    col: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    mode: PropTypes.string.isRequired,
+    setBlockType: PropTypes.func.isRequired,
+    line: PropTypes.number.isRequired,
+    getTypeImage: PropTypes.func.isRequired,
+    collapse: PropTypes.string.isRequired
+  }
+
   _createFrame = () => {
     let cols = [];
     for (let i = 1; i <= this.props.col; i++) {

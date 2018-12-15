@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import './Header.css';
+import PropTypes from 'prop-types';
 
 class Header extends Component {
+  static propTypes = {
+    menuSelect: PropTypes.func.isRequired
+  }
+
   render() {
     return (
       <div className='Header'>

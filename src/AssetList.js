@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
 import './AssetList.css';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 class AssetList extends Component {
+  static propTypes = {
+    reloadMapList: PropTypes.func.isRequired,
+    mapList: PropTypes.array.isRequired,
+    mapSetList: PropTypes.object.isRequired,
+    setImageSource: PropTypes.func.isRequired
+  }
+
   _selectType = (e) => {
     this.props.setImageSource('/images/' + this.props.mapSetList[this.props.mapList[e.target.id]] + '.jpg');
   }
