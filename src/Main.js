@@ -25,6 +25,7 @@ class Main extends Component {
     setMode: PropTypes.func.isRequired, 
     initialize: PropTypes.func.isRequired, 
     saveMap: PropTypes.func.isRequired, 
+    loadMap: PropTypes.func.isRequired, 
     onOffCollapse: PropTypes.func.isRequired, 
     onOffLine: PropTypes.func.isRequired, 
     editMapChipOrder:  PropTypes.func.isRequired
@@ -67,6 +68,7 @@ class Main extends Component {
                 setMode={this.props.setMode}
                 initialize={this.props.initialize}
                 saveMap={this.props.saveMap}
+                loadMap={this.props.loadMap}
                 onOffCollapse={this.props.onOffCollapse}
                 onOffLine={this.props.onOffLine}
                 collapse={this.props.collapse}

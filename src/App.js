@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios, {post} from 'axios';
 import './App.css';
 import Header from './Header';
 import Main from './Main';
@@ -16,7 +16,9 @@ class App extends Component {
     mapSetList: {'empty': 'empty'}, 
     selectedMapSet: 'empty', 
     mode: 'click',
-    line: 1
+    line: 1,
+    loadMapFile: null,
+    loadMapFileName: ''
   }
 
   componentDidMount() {
@@ -26,8 +28,8 @@ class App extends Component {
 
   _reloadMapList = () => {
     axios.get('/assets')
-    .then((response) => {
-      this.setState({mapList: response.data.mapList, mapSetList: response.data.mapSetList});
+    .then((res) => {
+      this.setState({mapList: res.data.mapList, mapSetList: res.data.mapSetList});
     })
     .catch((err) => {
       console.log(err);
@@ -136,28 +138,106 @@ class App extends Component {
 
     let map = '';
     let rowId, colId;
+    let mapElement;
+    let type;
+    let matcher = {};
     for (let i = 1; i <= this.state.row; i++) {
       rowId = i < 10 ? '0' + i : i;
       for (let j = 1; j <= this.state.col; j++) {
         colId = j < 10 ? '0' + j : j;
-        map += this.state.mapList.indexOf(this.state[rowId + '' + colId]);
+
+        type = this.state[rowId + '' + colId];
+        mapElement = String.fromCharCode(65 + this.state.mapList.indexOf(type));
+        if (!(mapElement in matcher)) {
+          matcher[mapElement] = type;
+        } 
+        map += mapElement;
       }
     }
 
-    axios({url: '/assets/save',
+    axios({url: '/map/save',
     method: 'POST',
-    data: {map: map, fileName: fileName, row: this.state.row, col: this.state.col},
+    data: {fileName: fileName, row: this.state.row, col: this.state.col, width: this.state.width, height: this.state.height, matcher: matcher, map: map},
     responseType: 'blob',
     })
     .then(response => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', fileName + '.txt');
+      link.setAttribute('download', fileName + '.json');
       document.body.appendChild(link);
       link.click();
     })
     .catch(err => {console.log(err)});
+  }
+
+  _drawLoadMap = (param) => {
+    this.setState({
+      row: param['row'],
+      col: param['col'],
+      width: param['width'],
+      height: param['height'],
+    });
+
+    const map = param['map'];
+    const matcher = param['matcher'];
+    let rowId, colId;
+    let obj;
+    let index = 0;
+
+    for (let i = 1; i <= this.state.row; i++) {
+      rowId = i < 10 ? '0' + i : i;
+      for (let j = 1; j <= this.state.col; j++) {
+        colId = j < 10 ? '0' + j : j;
+        obj = {};
+        
+        obj[rowId + '' + colId] = matcher[map[index]];
+        this.setState(obj);
+        index++;
+      }
+    }
+  }
+  
+  _sendMapFile = () => {
+    const url = '/map/load';
+    const formData = new FormData();
+    
+    formData.append('mapFile', this.state.loadMapFile);
+    formData.append('fileName', this.state.loadMapFileName);
+
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    }
+    return post(url, formData, config);
+  }
+
+  _uploadMapFile = () => {
+    this._sendMapFile()
+    .then((res)=>{
+      this._drawLoadMap(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  _setMapFile = (e) => {
+    this.setState({loadMapFile: e.target.files[0], loadMapFileName: e.target.files[0].name});
+    this._uploadMapFile();
+  }
+
+  _loadMap = () => {
+    const form = document.createElement('form');
+    form.onsubmit = this._onFormSubmit;
+    const file = document.createElement('input');
+    file.type = 'file';
+    file.onchange = this._setMapFile;
+    form.append(file);
+    document.body.appendChild(form);
+    file.style.display = 'none';
+    file.click();
   }
 
   render() {
@@ -184,6 +264,7 @@ class App extends Component {
         mode={this.state.mode}
         setMode={this._setMode}
         saveMap={this._saveMap}
+        loadMap={this._loadMap}
         collapse={this.state.collapse}
         line={this.state.line}
         onOffCollapse={this._onOffCollapse}

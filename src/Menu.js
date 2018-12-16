@@ -15,6 +15,8 @@ class Menu extends Component {
     mapList: PropTypes.array.isRequired,
     collapse: PropTypes.string.isRequired,
     line: PropTypes.number.isRequired,
+    saveMap: PropTypes.func.isRequired,
+    loadMap: PropTypes.func.isRequired
   };
 
   _setRow = (e) => {
@@ -86,15 +88,15 @@ class Menu extends Component {
         <tbody>
           <tr>
             <td>row</td>
-            <td><input className='Input' id='row' onChange={this._setRow} type='number' max='50' defaultValue={this.props.row}></input></td>
+            <td><input className='Input' id='row' onChange={this._setRow} type='number' max='50' value={this.props.row}></input></td>
             <td>col</td>
-            <td><input className='Input' id='col' onChange={this._setCol} type='number' max='50' defaultValue={this.props.col}></input></td>
+            <td><input className='Input' id='col' onChange={this._setCol} type='number' max='50' value={this.props.col}></input></td>
           </tr>
           <tr>
             <td>width</td>
-            <td><input className='Input' id='width' onChange={this._setWidth} type='number' max='1000' defaultValue={this.props.width}></input></td>
+            <td><input className='Input' id='width' onChange={this._setWidth} type='number' max='1000' value={this.props.width}></input></td>
             <td>height</td>
-            <td><input className='Input' id='height' onChange={this._setHeigh} type='number' max='1000' defaultValue={this.props.height }></input></td>
+            <td><input className='Input' id='height' onChange={this._setHeigh} type='number' max='1000' value={this.props.height }></input></td>
           </tr>
           <tr>
             <td>collapse</td>
@@ -165,6 +167,8 @@ class Menu extends Component {
             <button onClick={this._initialize}>clear</button>
             &nbsp;&nbsp;
             <button onClick={this.props.saveMap}>save</button>
+            &nbsp;&nbsp;
+            <button onClick={this.props.loadMap}>load</button>
             </td>
           </tr>
         </tbody>
