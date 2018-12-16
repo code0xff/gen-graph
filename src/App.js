@@ -37,16 +37,16 @@ class App extends Component {
   }
 
   _initialize = () => {
-    let obj, rowId, colId;
+    let obj = {};
+    let rowId, colId;
     for (let i = 1; i <= 50; i++) {
       rowId = i < 10 ? '0' + i : i;
       for (let j = 1; j <= 50; j++) {
         colId = j < 10 ? '0' + j : j;
-        obj = {};
         obj[rowId + '' + colId] = 'empty';
-        this.setState(obj);
       }
     }
+    this.setState(obj);
   }
 
   _onOffCollapse = (e) => {
@@ -182,20 +182,19 @@ class App extends Component {
     const map = param['map'];
     const matcher = param['matcher'];
     let rowId, colId;
-    let obj;
+    let obj = {};
     let index = 0;
 
     for (let i = 1; i <= this.state.row; i++) {
       rowId = i < 10 ? '0' + i : i;
       for (let j = 1; j <= this.state.col; j++) {
         colId = j < 10 ? '0' + j : j;
-        obj = {};
         
         obj[rowId + '' + colId] = matcher[map[index]];
-        this.setState(obj);
         index++;
       }
     }
+    this.setState(obj);
   }
   
   _sendMapFile = () => {
