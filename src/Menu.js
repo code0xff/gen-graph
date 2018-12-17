@@ -129,8 +129,8 @@ class Menu extends Component {
               <div className='MenuList'>
                 {this._setMapList()}
               </div>
-              <button id='up' className='Updown' onClick={this.props.editMapChipOrder}>up</button>
-              <button id='down' className='Updown' onClick={this.props.editMapChipOrder}>down</button>
+              <button id='up' className='UpdownButton' onClick={this.props.editMapChipOrder}>up</button>
+              <button id='down' className='UpdownButton' onClick={this.props.editMapChipOrder}>down</button>
             </td>
           </tr>
           <tr>
@@ -164,11 +164,11 @@ class Menu extends Component {
           </tr>
           <tr>
             <td colSpan='4'>
-            <button onClick={this._initialize}>clear</button>
+            <button className='MenuButton' onClick={this._initialize}>clear</button>
             &nbsp;&nbsp;
-            <button onClick={this.props.saveMap}>save</button>
+            <button className='MenuButton' onClick={this.props.saveMap}>save</button>
             &nbsp;&nbsp;
-            <button onClick={this.props.loadMap}>load</button>
+            <button className='MenuButton' onClick={this.props.loadMap}>load</button>
             </td>
           </tr>
         </tbody>
