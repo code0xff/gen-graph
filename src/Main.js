@@ -1,180 +1,86 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
-import './Menu.css';
+import Map from './Map';
+import Menu from './Menu';
+import PropTypes from 'prop-types';
 
-class Menu extends Component {
+class Main extends Component {
   static propTypes = {
-    setRow: PropTypes.func.isRequired,
-    setCol: PropTypes.func.isRequired,
-    setWidth: PropTypes.func.isRequired,
-    setHeight: PropTypes.func.isRequired,
-    row: PropTypes.number.isRequired,
-    col: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    mapList: PropTypes.array.isRequired,
-    collapse: PropTypes.string.isRequired,
-    line: PropTypes.number.isRequired,
-    saveMap: PropTypes.func.isRequired,
-    loadMap: PropTypes.func.isRequired
-  };
-
-  _setRow = (e) => {
-    let rowSize = e.target.value === '' ? 0 : parseInt(e.target.value);
-    if (rowSize > 50) {
-      alert('row의 최대 사이즈는 50입니다.');
-      e.target.value = 50;
-      rowSize = 50;
-    }
-    this.props.setRow(rowSize);
+    row: PropTypes.number.isRequired, 
+    col: PropTypes.number.isRequired, 
+    width: PropTypes.number.isRequired, 
+    height: PropTypes.number.isRequired, 
+    setBlockType: PropTypes.func.isRequired, 
+    getTypeImage: PropTypes.func.isRequired, 
+    mode: PropTypes.string.isRequired, 
+    collapse: PropTypes.string.isRequired, 
+    line: PropTypes.number.isRequired, 
+    setRow: PropTypes.func.isRequired, 
+    setCol: PropTypes.func.isRequired, 
+    setWidth: PropTypes.func.isRequired, 
+    setHeight: PropTypes.func.isRequired, 
+    mapList: PropTypes.array.isRequired, 
+    mapSetList: PropTypes.object.isRequired, 
+    updateMapSet: PropTypes.func.isRequired, 
+    selectedMapSet: PropTypes.string.isRequired, 
+    setMode: PropTypes.func.isRequired, 
+    initialize: PropTypes.func.isRequired, 
+    saveMap: PropTypes.func.isRequired, 
+    loadMap: PropTypes.func.isRequired, 
+    onOffCollapse: PropTypes.func.isRequired, 
+    onOffLine: PropTypes.func.isRequired, 
+    editMapChipOrder:  PropTypes.func.isRequired
   }
 
-  _setCol = (e) => {
-    let colSize = e.target.value === '' ? 0 : parseInt(e.target.value);
-    if (colSize > 50) {
-      alert('col의 최대 사이즈는 50입니다.');
-      e.target.value = 50;
-      colSize = 50;
-    }
-    this.props.setCol(colSize);
-  }
-
-  _setWidth = (e) => {
-    let widthSize = e.target.value === '' ? 0 : parseInt(e.target.value);
-    if (widthSize > 1000) {
-      alert('width의 최대 사이즈는 1000입니다.');
-      e.target.value = 1000;
-      widthSize = 1000;
-    }
-    this.props.setWidth(widthSize);
-  }
-
-  _setHeigh = (e) => {
-    let heightSize = e.target.value === '' ? 0 : parseInt(e.target.value);
-    if (heightSize > 1000) {
-      alert('height의 최대 사이즈는 1000입니다.');
-      e.target.value = 1000;
-      heightSize = 1000;
-    }
-    this.props.setHeight(heightSize);
-  }
-
-  _setMapList = () => {
-    return (this.props.mapList.map((type) => {
-      return (
-      <div className='MapSetContent'
-      key={type} 
-      id={type} 
-      onClick={this.props.updateMapSet}
-      >
-      <img alt={type} 
-      id={type}
-      className='MapListImage' 
-      src={'/images/' + this.props.mapSetList[type] + '.jpg'}></img>&nbsp;
-      {type}</div>)
-    }));
-  }
-
-  _initialize = () => {
-    if (window.confirm('If you want to clear map, please click yes. it needs few minutes...')) {
-      this.props.initialize();
-    }
-  }
-
-  render(){
+  render() {
     return (
-      <table>
-        <thead></thead>
-        <tbody>
-          <tr>
-            <td>row</td>
-            <td><input className='Input' id='row' onChange={this._setRow} type='number' max='50' value={this.props.row}></input></td>
-            <td>col</td>
-            <td><input className='Input' id='col' onChange={this._setCol} type='number' max='50' value={this.props.col}></input></td>
-          </tr>
-          <tr>
-            <td>width</td>
-            <td><input className='Input' id='width' onChange={this._setWidth} type='number' max='1000' value={this.props.width}></input></td>
-            <td>height</td>
-            <td><input className='Input' id='height' onChange={this._setHeigh} type='number' max='1000' value={this.props.height }></input></td>
-          </tr>
-          <tr>
-            <td>collapse</td>
-            <td>
-              <input type='checkbox' 
-              onClick={this.props.onOffCollapse} 
-              defaultChecked={this.props.collapse === 'collapse' ? 'checked' : ''}>
-              </input></td>
-            <td>line off</td>
-            <td><input 
-            type='checkbox' 
-            onClick={this.props.onOffLine}
-            defaultChecked={this.props.line === 0 ? 'checked' : ''}>
-            </input></td>
-          </tr>
-          <tr>
-            <td colSpan='4'>
-              <div style={{textAlign: 'center'}}>
-                map chip
-                &nbsp;
-                <img 
-                alt='seleted' 
-                className='MapListImage' 
-                src={'/images/' + this.props.mapSetList[this.props.selectedMapSet] + '.jpg'}/>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colSpan='4'>
-              <div className='MenuList'>
-                {this._setMapList()}
-              </div>
-              <button id='up' className='UpdownButton' onClick={this.props.editMapChipOrder}>up</button>
-              <button id='down' className='UpdownButton' onClick={this.props.editMapChipOrder}>down</button>
-            </td>
-          </tr>
-          <tr>
-            <td colSpan='4'>
-              <div style={{textAlign: 'center'}}>
-                edit mode
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colSpan='4'>
-              <div className='ModeList' style={{}}>
-                <input
-                className='Mode'
-                type='radio' 
-                name='mode' 
-                value='click' 
-                onClick={this.props.setMode}
-                defaultChecked={this.props.mode === 'click' ? 'checked':''}/>click
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input 
-                className='Mode'
-                type='radio' 
-                name='mode' 
-                value='over' 
-                onClick={this.props.setMode}
-                defaultChecked={this.props.mode === 'over' ? 'checked':''}
-                />over
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colSpan='4'>
-            <button className='MenuButton' onClick={this._initialize}>clear</button>
-            &nbsp;&nbsp;
-            <button className='MenuButton' onClick={this.props.saveMap}>save</button>
-            &nbsp;&nbsp;
-            <button className='MenuButton' onClick={this.props.loadMap}>load</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div style={{paddingTop: '50px'}}>
+        <table style={{margin: 'auto'}}>
+          <tbody>
+            <tr>
+              <td>
+                <Map 
+                row={this.props.row} 
+                col={this.props.col} 
+                width={this.props.width}
+                height={this.props.height}
+                setBlockType={this.props.setBlockType}
+                getTypeImage={this.props.getTypeImage}
+                mode={this.props.mode}
+                collapse={this.props.collapse}
+                line={this.props.line}
+                />
+              </td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td><Menu
+                row={this.props.row} 
+                col={this.props.col} 
+                width={this.props.width}
+                height={this.props.height}
+                setRow={this.props.setRow}
+                setCol={this.props.setCol}
+                setWidth={this.props.setWidth}
+                setHeight={this.props.setHeight}
+                mapList={this.props.mapList}
+                mapSetList={this.props.mapSetList}
+                updateMapSet={this.props.updateMapSet}
+                selectedMapSet={this.props.selectedMapSet}
+                mode={this.props.mode}
+                setMode={this.props.setMode}
+                initialize={this.props.initialize}
+                saveMap={this.props.saveMap}
+                loadMap={this.props.loadMap}
+                onOffCollapse={this.props.onOffCollapse}
+                onOffLine={this.props.onOffLine}
+                collapse={this.props.collapse}
+                line={this.props.line}
+                editMapChipOrder={this.props.editMapChipOrder}
+                /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     )
   }
 }
 
-export default Menu;
+export default Main; 
