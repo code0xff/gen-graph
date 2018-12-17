@@ -28,10 +28,14 @@
   width: 50px;
 }
 
-.Updown {
+.UpdownButton {
   width: 50%;
 }
 
 .Mode:hover {
   cursor: pointer;
+}
+
+.MenuButton {
+  width: 70px;
 }
