@@ -45,7 +45,7 @@ class Map extends Component {
 
   render() {
     return (
-      <div>
+      <div className='Map'>
         <table 
         style={{borderCollapse: this.props.collapse}}>
           <thead></thead>
