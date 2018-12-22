@@ -107,6 +107,10 @@ class App extends Component {
   }
 
   _editMapChipOrder = (e) => {
+    if (this.state.selectedMapSet === 'empty') {
+      return;
+    }
+
     let selectedIndex = this.state.mapList.indexOf(this.state.selectedMapSet);
     let mapList = this.state.mapList;
     if (e.target.id === 'up') {
@@ -178,6 +182,8 @@ class App extends Component {
       width: param['width'],
       height: param['height'],
     });
+
+    this._initialize();
 
     const map = param['map'];
     const matcher = param['matcher'];
