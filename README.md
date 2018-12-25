@@ -3,7 +3,7 @@
 1. download Node.js and source code.
 
 ```
-https://github.com/code0xff/gen-graph.git
+$git clone https://github.com/code0xff/gen-graph.git
 ```
 
 2. install modules using npm.
